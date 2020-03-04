@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\Event;
 /**
  * Users Controller
  *
@@ -12,6 +13,29 @@ namespace App\Controller;
  */
 class UsersController extends AppController
 {
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow('add');
+    }
+
+    public function login(){
+        if($this->request->is('post'))
+        {
+            $user=$this->Auth->identify();
+            if($user)
+            {
+                $this->Auth->setUser($user);
+                return $this->redirect(['controller'=>'Tests']);
+            }
+            $this->Flash->error('incorrect login');
+        }
+    }
+    public function logout()
+    {
+        $this->Flash->success('you are logged out');   
+        return $this->redirect($this->Auth->logout());
+    }
     /**
      * Index method
      *
@@ -23,6 +47,16 @@ class UsersController extends AppController
 
         $this->set(compact('users'));
     }
+    /*public function initialize()
+    {
+        parent::initialize();
+        // Add the 'add' action to the allowed actions list.
+        $this->Auth->allow(['logout', 'add']);
+    }*/
+    public function registry(){
+        return $this->redirect(['controller'=>'Tests']);
+    }
+
 
     /**
      * View method
@@ -53,7 +87,7 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Tests']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }

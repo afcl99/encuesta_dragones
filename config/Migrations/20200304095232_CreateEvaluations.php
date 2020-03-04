@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Migrations\AbstractMigration;
 
-class CreateUsersTests extends AbstractMigration
+class CreateEvaluations extends AbstractMigration
 {
     /**
      * Change Method.
@@ -14,28 +14,18 @@ class CreateUsersTests extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('users_tests');
-        $table->addColumn('user_id', 'string', [
+        $table = $this->table('evaluations');
+        $table->addColumn('id_users_test', 'integer', [
             'default' => null,
             'limit' => 50,
             'null' => false,
         ]);
-        $table->addColumn('test_id', 'integer', [
+        $table->addColumn('email', 'string', [
             'default' => null,
-            'limit' => 50,
+            'limit' => 255,
             'null' => false,
         ]);
-        $table->addColumn('message', 'string', [
-            'default' => null,
-            'limit' => 500,
-            'null' => false,
-        ]);
-        $table->addColumn('url_app', 'string', [
-            'default' => null,
-            'limit' => 500,
-            'null' => false,
-        ]);
-        $table->addColumn('max_date', 'date', [
+        $table->addColumn('date', 'datetime', [
             'default' => null,
             'null' => false,
         ]);
@@ -47,8 +37,6 @@ class CreateUsersTests extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addForeignkey("user_id","users","username",["delete"=>"CASCADE","update"=>"CASCADE"]);
-        $table->addForeignkey("test_id","tests","id",["delete"=>"CASCADE","update"=>"CASCADE"]);
         $table->create();
     }
 }

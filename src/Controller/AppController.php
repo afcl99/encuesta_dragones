@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\Event;
 
 /**
  * Application Controller
@@ -41,13 +42,37 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        
+
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-
+        $this->loadComponent('Auth',[
+            'authenticate'=>[
+                'Form'=>[
+                    'fields'=>[
+                        'username'=>'username',
+                        'password'=>'password'
+                    ]
+                ]
+            ],
+            'loginAction'=>[
+                'controller'=>'Users',
+                'action'=>'login'
+            ],'unauthorizedRedirect' => $this->referer()
+        ]);
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
     }
+    public function isAuthorized($user)
+    {
+        return true;
+    }
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['display', 'view', 'index']);
+    }
+    
 }

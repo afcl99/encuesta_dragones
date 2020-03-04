@@ -28,8 +28,8 @@ class UsersSeed extends AbstractSeed
             'password'=>'123',
             'firstname'=>'Kevin',
             'lastname'=>'De Bruyne',
-            'role'=>'pollster',
-            'active'=>'true',
+            'role'=>'admin',
+            'active'=>True,
             'created'=>date('Y-m-d H:i:s'),
             'modified'=>date('Y-m-d H:i:s')];
 
@@ -38,18 +38,18 @@ class UsersSeed extends AbstractSeed
             'password'=>'321',
             'firstname'=>'Alvin',
             'lastname'=>'Meyer',
-            'role'=>'pollster',
-            'active'=>'true',
+            'role'=>'admin',
+            'active'=>True,
             'created'=>date('Y-m-d H:i:s'),
             'modified'=>date('Y-m-d H:i:s')];
 
         $data[] = [
-            'username'=>'ERT',
+            'username'=>'afcl',
             'password'=>'234',
-            'firstname'=>'Gaspar',
-            'lastname'=>'Bahar',
-            'role'=>'surveyed',
-            'active'=>'true',
+            'firstname'=>'andres',
+            'lastname'=>'claros',
+            'role'=>'admin',
+            'active'=>True,
             'created'=>date('Y-m-d H:i:s'),
             'modified'=>date('Y-m-d H:i:s')];
 
@@ -58,8 +58,8 @@ class UsersSeed extends AbstractSeed
             'password'=>'156',
             'firstname'=>'Xavier',
             'lastname'=>'Cuasapud',
-            'role'=>'surveyed',
-            'active'=>'False',
+            'role'=>'admin',
+            'active'=>True,
             'created'=>date('Y-m-d H:i:s'),
             'modified'=>date('Y-m-d H:i:s')];
         
@@ -68,8 +68,8 @@ class UsersSeed extends AbstractSeed
             'password'=>'675',
             'firstname'=>'Micael',
             'lastname'=>'Angelo',
-            'role'=>'surveyed',
-            'active'=>'True',
+            'role'=>'admin',
+            'active'=>True,
             'created'=>date('Y-m-d H:i:s'),
             'modified'=>date('Y-m-d H:i:s')];
         $table->insert($data)->save();
